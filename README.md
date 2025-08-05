@@ -59,32 +59,8 @@ The output is in the dist/ folder, ready for deployment.
 
 
 File Structure
-habit-tracker/
-├── node_modules/              # Project dependencies
-├── public/                    # Static assets
-│   └── vite.svg              # Vite logo
-├── src/                      # Source code
-│   ├── components/           # Reusable UI components
-│   │   ├── LoginForm.jsx     # Login/signup form
-│   │   ├── HabitForm.jsx     # Form to add new habits
-│   │   ├── HabitGrid.jsx     # 7-day habit tracking grid
-│   │   └── Header.jsx        # Header with app title and logout button
-│   ├── hooks/                # Custom React hooks
-│   │   └── useAuth.js        # Authentication logic (login, logout, user state)
-│   ├── pages/                # Page components
-│   │   ├── LoginPage.jsx     # Login/signup page
-│   │   └── HabitTrackerPage.jsx # Dashboard for habit tracking
-│   ├── utils/                # Utility functions
-│   │   └── storage.js        # localStorage operations
-│   ├── App.jsx               # Main app component with routing
-│   ├── index.css             # Global styles with Tailwind CSS
-│   ├── main.jsx              # Entry point for React rendering
-│   └── tailwind.config.js    # Tailwind CSS configuration
-├── .gitignore                # Git ignore file
-├── index.html                # HTML entry point
-├── package.json              # Project metadata and dependencies
-├── README.md                 # This file
-└── vite.config.js            # Vite configuration
+![Uploading image.png…]()
+
 
 Usage
 
