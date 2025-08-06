@@ -18,7 +18,7 @@ npm (comes with Node.js)
 
 Installation
 1. Clone the Repository
-git clone https://github.com/yourusername/habit-tracker.git
+git clone  https://github.com/amreshkyadav998/HabitTracker.git
 cd habit-tracker
 
 2. Install Dependencies
