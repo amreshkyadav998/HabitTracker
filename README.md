@@ -1,7 +1,3 @@
-Here’s a **clean, professional, and well-structured `README.md`** in proper **documentation format** for your **Habit Tracker** project:
-
----
-
 # 📱 Habit Tracker
 
 A **web-based habit tracking application** built with **React** and **Tailwind CSS**, allowing users to track, manage, and visualize their daily habits. It features simple authentication, a responsive UI, and persistent local storage.
