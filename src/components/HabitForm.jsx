@@ -1,78 +1,80 @@
 import { useState } from 'react';
-import { getHabits, saveHabits } from '../utils/storage';
+import { saveHabits } from '../utils/storage';
 import toast from 'react-hot-toast';
 
-function HabitForm({ userPhone, setHabits }) {
-  const [name, setName] = useState('');
-  const [category, setCategory] = useState('');
-  const [color, setColor] = useState('#3B82F6');
+const categories = ['Fitness', 'Study', 'Health', 'Work', 'Hobby'];
 
-  const handleSubmit = (e) => {
+function HabitForm({ phone, habits, setHabits }) {
+  const [newHabit, setNewHabit] = useState({
+    name: '',
+    category: categories[0],
+    color: '#4B5EAA'
+  });
+
+  const addHabit = (e) => {
     e.preventDefault();
-    if (!name || !category) {
-      toast.error('Please fill out all fields');
-      return;
-    }
-    const newHabit = {
+    if (!newHabit.name) return;
+    
+    const habit = {
+      ...newHabit,
       id: Date.now(),
-      name,
-      category,
-      color,
-      days: Array(7).fill(false), // Mon-Sun, false = Not Done
+      days: Array(7).fill(false)
     };
-    const updatedHabits = [...getHabits(userPhone), newHabit];
-    saveHabits(userPhone, updatedHabits);
+    
+    const updatedHabits = [...habits, habit];
+    saveHabits(phone, updatedHabits);
     setHabits(updatedHabits);
-    setName('');
-    setCategory('');
-    setColor('#3B82F6');
-    toast.success('Habit added!');
+    setNewHabit({ name: '', category: categories[0], color: '#4B5EAA' });
+    toast.success('Habit added successfully!');
   };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-md mx-auto p-4 bg-white rounded-lg shadow-md mb-6">
-      <h3 className="text-lg font-semibold mb-4">Add New Habit</h3>
-      <div className="space-y-4">
+    <form onSubmit={addHabit} className="mb-8 bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-2xl">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div>
-          <label className="block text-sm font-medium text-gray-700">Habit Name</label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+            Habit Name
+          </label>
           <input
             type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={newHabit.name}
+            onChange={(e) => setNewHabit({ ...newHabit, name: e.target.value })}
+            className="mt-1 block w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-md focus:border-indigo-500 focus:ring-indigo-500 p-2"
             placeholder="e.g., Exercise"
-            className="mt-1 w-full p-2 border rounded-md"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700">Category</label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+            Category
+          </label>
           <select
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-            className="mt-1 w-full p-2 border rounded-md"
+            value={newHabit.category}
+            onChange={(e) => setNewHabit({ ...newHabit, category: e.target.value })}
+            className="mt-1 block w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-md focus:border-indigo-500 focus:ring-indigo-500 p-2"
           >
-            <option value="">Select Category</option>
-            <option value="Fitness">Fitness</option>
-            <option value="Study">Study</option>
-            <option value="Health">Health</option>
-            <option value="Work">Work</option>
+            {categories.map((cat) => (
+              <option key={cat} value={cat}>{cat}</option>
+            ))}
           </select>
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700">Color</label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+            Color
+          </label>
           <input
             type="color"
-            value={color}
-            onChange={(e) => setColor(e.target.value)}
-            className="mt-1 w-full h-10 border rounded-md"
+            value={newHabit.color}
+            onChange={(e) => setNewHabit({ ...newHabit, color: e.target.value })}
+            className="mt-1 block w-full h-10 rounded-lg"
           />
         </div>
-        <button
-          type="submit"
-          className="w-full bg-green-500 text-white p-2 rounded-md hover:bg-green-600 transition"
-        >
-          Add Habit
-        </button>
       </div>
+      <button
+        type="submit"
+        className="mt-6 bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-3 px-6 rounded-lg hover:from-indigo-700 hover:to-purple-700 transition-all duration-300 shadow-lg"
+      >
+        Add Habit
+      </button>
     </form>
   );
 }

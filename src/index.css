@@ -1,2 +1,19 @@
 @import "tailwindcss";
 
+html {
+  scroll-behavior: smooth;
+  @apply transition-colors duration-500;
+}
+
+body {
+  font-family: 'Inter', 'sans-serif';
+  @apply bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-black;
+}
+
+.dark {
+  @apply bg-gradient-to-br from-gray-900 to-black text-white;
+}
+
+.light {
+  @apply bg-gradient-to-br from-gray-50 to-white text-gray-900;
+}

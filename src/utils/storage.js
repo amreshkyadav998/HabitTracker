@@ -1,24 +1,22 @@
-export const getUsers = () => {
-  const users = localStorage.getItem('users');
-  return users ? JSON.parse(users) : [];
-};
-
-export const saveUser = (user) => {
-  const users = getUsers();
-  users.push(user);
+export function saveUser(phoneNumber, password) {
+  const users = JSON.parse(localStorage.getItem('users')) || {};
+  if (users[phoneNumber]) {
+    return users[phoneNumber].password === password;
+  }
+  users[phoneNumber] = { password, habits: [] };
   localStorage.setItem('users', JSON.stringify(users));
-};
+  return true;
+}
 
-export const getUserByPhone = (phone) => {
-  const users = getUsers();
-  return users.find((u) => u.phone === phone);
-};
+export function getHabits(phone) {
+  const users = JSON.parse(localStorage.getItem('users')) || {};
+  return users[phone]?.habits;
+}
 
-export const getHabits = (phone) => {
-  const habits = localStorage.getItem(`habits_${phone}`);
-  return habits ? JSON.parse(habits) : [];
-};
-
-export const saveHabits = (phone, habits) => {
-  localStorage.setItem(`habits_${phone}`, JSON.stringify(habits));
-};
+export function saveHabits(phone, habits) {
+  const users = JSON.parse(localStorage.getItem('users')) || {};
+  if (users[phone]) {
+    users[phone].habits = habits;
+    localStorage.setItem('users', JSON.stringify(users));
+  }
+}
